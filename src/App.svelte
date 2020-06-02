@@ -3,7 +3,7 @@
 	import Footer from "./components/Footer.svelte";
 	import PollList from "./components/PollList.svelte";
 	import CreatePollForm from "./components/CreatePollForm.svelte";
-	import Tabs from "./shared/tabs.svelte";
+	import Tabs from "./shared/Tabs.svelte";
 
 	// Tabs
 	let items = ["Current Polls", "Add New Poll"];
