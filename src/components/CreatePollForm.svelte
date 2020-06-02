@@ -50,7 +50,7 @@
 
         // Add new poll
         if (valid) {
-            let poll = { ...fields, votesA: 0, votesB: 0, id: Date.now().toString() }
+            let poll = { ...fields, votesA: 0, votesB: 0, id: Date.now().toString() };
             
             // Save poll to store
             PollStore.update(currentPolls => [poll, ...currentPolls]);

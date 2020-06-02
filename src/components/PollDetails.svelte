@@ -2,6 +2,7 @@
     import PollStore from "../stores/PollStore.js";
     import Button from "../shared/Button.svelte";
     import { tweened } from "svelte/motion";
+    
     export let poll;
 
     // Reactive value
