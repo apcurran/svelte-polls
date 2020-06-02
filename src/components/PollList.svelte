@@ -1,12 +1,12 @@
 <script>
+    import PollStore from "../stores/PollStore.js";
     import PollDetails from "./PollDetails.svelte";
-    export let polls = [];
-
 
 </script>
 
 <div class="poll-list">
-    {#each polls as poll (poll.id)}
+    <!-- $PollStore gets data from store -->
+    {#each $PollStore as poll (poll.id)}
         <!-- Forward on:vote to parent component -->
         <PollDetails poll={poll} on:vote />
     {/each}
