@@ -1,4 +1,6 @@
 <script>
+    import { fade } from "svelte/transition";
+    import { flip } from "svelte/animate";
     import PollStore from "../stores/PollStore.js";
     import PollDetails from "./PollDetails.svelte";
 
@@ -7,8 +9,9 @@
 <div class="poll-list">
     <!-- $PollStore gets data from store -->
     {#each $PollStore as poll (poll.id)}
-        <!-- Forward on:vote to parent component -->
-        <PollDetails poll={poll} />
+        <div in:fade animate:flip={{ duration: 500 }} class="poll-details-container">
+            <PollDetails poll={poll} />
+        </div>
     {/each}
 </div>
 
