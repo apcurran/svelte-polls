@@ -1,8 +1,7 @@
 <script>
-    import { createEventDispatcher } from "svelte";
+    import PollStore from "../stores/PollStore.js";
+    import Button from "../shared/Button.svelte";
     export let poll;
-
-    const dispatch = createEventDispatcher();
 
     // Reactive value
     $: totalVotes = poll.votesA + poll.votesB;
@@ -10,7 +9,24 @@
     $: percentB = Math.floor(100 / totalVotes * poll.votesB);
 
     function handleVote(option, id) {
-        dispatch("vote", { option, id });
+        PollStore.update(currentPolls => {
+            let copiedPolls = [...currentPolls];
+            let upvotedPoll = copiedPolls.find(poll => poll.id === id);
+    
+            if (option === "a") {
+                upvotedPoll.votesA++;
+            } else if (option === "b") {
+                upvotedPoll.votesB++;
+            }
+    
+            return copiedPolls;
+        });
+    }
+
+    function handleDelete(id) {
+        PollStore.update(currentPolls => {
+            return currentPolls.filter(poll => poll.id !== id);
+        });
     }
 </script>
 
@@ -25,11 +41,12 @@
         <div style="width: {percentB}%" class="percent percent-b"></div>
         <span class="poll__answer poll__answer__answer-b">{poll.answerB} ({poll.votesB})</span>
     </div>
+    <Button flat={true} on:click={() => handleDelete(poll.id)}>Delete</Button>
 </div>
 
 <style>
     .poll {
-        padding: 1.25rem;
+        padding: 1.35rem;
         border-radius: 10px;
         box-shadow: 0 2px 6px rgba(0, 0, 0, .2);
     }

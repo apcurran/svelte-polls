@@ -8,7 +8,7 @@
     <!-- $PollStore gets data from store -->
     {#each $PollStore as poll (poll.id)}
         <!-- Forward on:vote to parent component -->
-        <PollDetails poll={poll} on:vote />
+        <PollDetails poll={poll} />
     {/each}
 </div>
 
